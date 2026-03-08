@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Account Book
 
-## Getting Started
+A collaborative account book app for tracking credits and debits across shared workspaces. Built with Next.js, Supabase, and Tailwind CSS.
 
-First, run the development server:
+## Features
+
+- Authentication (sign up / sign in) via Supabase Auth
+- Create and manage workspaces
+- Invite team members via invite code
+- Role-based access: owner, editor, viewer
+- Add credit/debit entries with payment mode, description, and date
+- Attach links to entries
+- Activity log per workspace
+- Realtime updates
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Database & Auth**: Supabase (PostgreSQL + RLS)
+- **Styling**: Tailwind CSS v4
+- **Data fetching**: TanStack Query v5
+- **Icons**: Lucide React
+
+## Local Development
+
+### 1. Clone and install
+
+```bash
+git clone <repo-url>
+cd account-book
+npm install
+```
+
+### 2. Set up environment variables
+
+```bash
+cp .env.example .env.local
+```
+
+Fill in your Supabase project values in `.env.local`. Find these in your Supabase dashboard under **Project Settings → API**.
+
+### 3. Set up the database
+
+Run the full schema in the **Supabase SQL Editor**:
+
+```
+supabase/schema.sql
+```
+
+This creates all tables, RLS policies, triggers, and functions from a clean state. It is safe to re-run.
+
+### 4. Start the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment (Vercel)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push to GitHub
+2. Import the repo in [Vercel](https://vercel.com)
+3. Add environment variables in **Vercel → Project → Settings → Environment Variables**:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4. Deploy
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── (auth)/         # Login & signup pages
+│   ├── (app)/          # Protected app pages (dashboard, workspace)
+│   └── join/[code]/    # Invite link handler
+├── components/         # UI and feature components
+├── hooks/              # React Query hooks (workspace, entries)
+├── lib/supabase/       # Supabase client + middleware
+└── types/              # TypeScript types
+supabase/
+└── schema.sql          # Full database schema (run this in Supabase)
+```
