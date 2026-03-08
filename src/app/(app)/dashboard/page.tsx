@@ -59,27 +59,27 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 px-6 py-4">
+      <header className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center shrink-0">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
             <h1 className="text-lg font-bold text-gray-900">Account Book</h1>
           </div>
           <button onClick={handleSignOut} className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 transition-colors">
-            <LogOut className="w-4 h-4" /> Sign out
+            <LogOut className="w-4 h-4" /><span className="hidden sm:inline">Sign out</span>
           </button>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-6 py-8">
-        <div className="flex items-center justify-between mb-6">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
             <h2 className="text-xl font-semibold text-gray-900">Your Workspaces</h2>
             <p className="text-sm text-gray-500 mt-0.5">Select a workspace or create a new one</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 shrink-0">
             <Button variant="secondary" onClick={() => setShowJoin(true)}>
               <LinkIcon className="w-4 h-4" /> Join
             </Button>

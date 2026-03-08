@@ -98,42 +98,45 @@ export default function WorkspacePage({ params }: { params: Promise<{ id: string
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+      <header className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             <button onClick={() => router.push('/dashboard')}
-              className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-500">
+              className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-500 shrink-0">
               <ArrowLeft className="w-5 h-5" />
             </button>
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shrink-0">
               <BookOpen className="w-4 h-4 text-white" />
             </div>
-            <div>
-              <h1 className="font-semibold text-gray-900">{workspace.name}</h1>
+            <div className="min-w-0">
+              <h1 className="font-semibold text-gray-900 truncate">{workspace.name}</h1>
               <p className="text-xs text-gray-400">{members?.length ?? 0} member{members?.length !== 1 ? 's' : ''}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => setShowActivity(true)}>
-              <Activity className="w-4 h-4" /> Activity
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => setShowInvite(true)}>
-              <Users className="w-4 h-4" /> Members
-            </Button>
-            <Button variant="secondary" size="sm" onClick={exportCSV}>
-              <Download className="w-4 h-4" /> Export
-            </Button>
+          <div className="flex items-center gap-1 shrink-0">
+            <button onClick={() => setShowActivity(true)}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-500" title="Activity">
+              <Activity className="w-4 h-4" />
+            </button>
+            <button onClick={() => setShowInvite(true)}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-500" title="Members">
+              <Users className="w-4 h-4" />
+            </button>
+            <button onClick={exportCSV}
+              className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-500" title="Export CSV">
+              <Download className="w-4 h-4" />
+            </button>
             {canEdit && (
               <Button size="sm" onClick={() => setShowAddEntry(true)}>
-                <Plus className="w-4 h-4" /> Add Entry
+                <Plus className="w-4 h-4" /><span className="hidden sm:inline ml-1">Add Entry</span>
               </Button>
             )}
           </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-6">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col gap-4 sm:gap-6">
         {/* Summary */}
         <SummaryBar summary={summary} />
 

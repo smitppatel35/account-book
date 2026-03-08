@@ -30,7 +30,7 @@ export function Modal({ open, onClose, title, children, width = 'max-w-lg' }: Mo
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
-        <div className="overflow-y-auto p-6">{children}</div>
+        <div className="overflow-y-auto p-4 sm:p-6">{children}</div>
       </div>
     </div>
   )
